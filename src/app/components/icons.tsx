@@ -1,4 +1,4 @@
-export const Logo = () => (
+export const LogoIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={96}
@@ -12,7 +12,7 @@ export const Logo = () => (
   </svg>
 )
 
-export const Search = () => (
+export const SearchIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={17}
@@ -23,7 +23,7 @@ export const Search = () => (
   </svg>
 )
 
-export const Star = () => (
+export const StarIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg"
   width={21}
     height={21}

@@ -1,4 +1,4 @@
-import { Star } from './icons'
+import { StarIcon } from './icons'
 
 interface Props {
   superHost: boolean
@@ -30,7 +30,7 @@ export default function Card ({
           {type} {beds !== null && `. ${beds}`}
         </span>
         <div className='flex items-center'>
-          <Star />
+          <StarIcon />
           <span className='text-[#4F4F4F] text-xs leading-[normal] font-medium ml-[3px]'>
             {rating}
           </span>
