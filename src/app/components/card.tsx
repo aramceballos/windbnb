@@ -18,8 +18,12 @@ export default function Card ({
   photo
 }: Props) {
   return (
-    <div className='w-[350px] mt-6 mb-8 mx-auto'>
-      <img className='w-full h-[238px] rounded-3xl my-3' src={photo} alt='' />
+    <div className='w-full mt-6 mb-8 cursor-pointer'>
+      <img
+        className='w-full aspect-[16/10] rounded-3xl my-3 object-cover'
+        src={photo}
+        alt=''
+      />
       <div className='flex items-center my-3'>
         {superHost && (
           <div className='py-[5px] px-[8px] rounded-xl border-solid border-[1px] border-[#4F4F4F] text-[10px] font-bold text-[#4F4F4F] leading-[normal] uppercase'>
