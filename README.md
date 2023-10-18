@@ -70,6 +70,9 @@ $ git clone https://github.com/aramceballos/windbnb
 # Install dependencies
 $ npm install
 
+#Build the app
+$ npm run build
+
 # Run the app
 $ npm start
 ```
