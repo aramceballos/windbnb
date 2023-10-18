@@ -139,12 +139,16 @@ export default function SearchBar ({ country, city, guests }: Props) {
         onClick={handleClickModal}
         style={
           isSearchOpen
-            ? { opacity: '1', zIndex: 99 }
-            : { opacity: '0', zIndex: -1 }
+            ? { opacity: '1', zIndex: 99, backgroundColor: '#4F4F4F66' }
+            : { opacity: '0', zIndex: -1, backgroundColor: 'transparent' }
         }
-        className='fixed top-0 left-0 w-full h-full bg-[#4F4F4F66]'
+        className='fixed top-0 left-0 w-full h-full transition-all'
       >
-        <div className='fixed top-0 left-0 w-full h-[632px] bg-white p-3 lg:pb-[54px] lg:px-24'>
+        <div style={
+          isSearchOpen
+            ? { top: '0' }
+            : { top: '-100vh' }
+        } className='fixed left-0 w-full h-[632px] bg-white p-3 lg:pb-[54px] lg:px-24 transition-all duration-700'>
           <div className='flex justify-between lg:hidden'>
             <span className='text-[#333] font-mulish text-xs font-bold leading-[normal]'>
               Edit your search
