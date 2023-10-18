@@ -97,6 +97,7 @@ export default function SearchBar ({ country, city, guests }: Props) {
   }
 
   const handleSearch = () => {
+    setIsSearchOpen(false)
     if (guestsParam > 0) {
       router.push(
         `?country=${countryParam}&city=${cityParam}&guests=${guestsParam}`
