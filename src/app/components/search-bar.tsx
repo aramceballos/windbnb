@@ -110,7 +110,7 @@ export default function SearchBar ({ country, city, guests }: Props) {
     <>
       <div
         onClick={handleOpenSearch}
-        className='flex items-center h-[55px] w-[298px] my-[38px] lg:my-0 mx-auto lg:mx-0 rounded-[16px] shadow-[0_1px_6px_0_rgba(0,0,0,0.1)] font-mulish cursor-pointer'
+        className='flex items-center h-[55px] w-[298px] my-[38px] lg:my-0 mx-auto lg:mx-0 rounded-[16px] shadow-[0_1px_6px_0_rgba(0,0,0,0.1)] lg:hover:shadow-[0_1px_6px_2px_rgba(0,0,0,0.1)] font-mulish cursor-pointer transition-shadow'
       >
         <div className='py-5 px-4 flex-grow'>
           <span className='text-[#333] text-sm font-normal'>
