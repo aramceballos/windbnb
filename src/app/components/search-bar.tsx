@@ -44,6 +44,7 @@ export default function SearchBar ({ country, city, guests }: Props) {
   const router = useRouter()
 
   const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [isLocationsMenuOpen, setIsLocationsMenuOpen] = useState(false)
   const [isGuestsMenuOpen, setIsGuestsMenuOpen] = useState(false)
   const [countryParam, setCountryParam] = useState(country)
   const [cityParam, setCityParam] = useState(city)
@@ -71,7 +72,13 @@ export default function SearchBar ({ country, city, guests }: Props) {
     setCityParam(city)
   }
 
+  const handleToggleLocationsMenu = () => {
+    setIsGuestsMenuOpen(false)
+    setIsLocationsMenuOpen(!isLocationsMenuOpen)
+  }
+
   const handleToggleGuestsMenu = () => {
+    setIsLocationsMenuOpen(false)
     setIsGuestsMenuOpen(!isGuestsMenuOpen)
   }
 
@@ -137,7 +144,7 @@ export default function SearchBar ({ country, city, guests }: Props) {
         }
         className='fixed top-0 left-0 w-full h-full bg-[#4F4F4F66]'
       >
-        <div className='fixed top-0 left-0 w-full h-[632px] bg-white p-3 lg:h-auto lg:pb-[54px]'>
+        <div className='fixed top-0 left-0 w-full h-[632px] bg-white p-3 lg:pb-[54px] lg:px-24'>
           <div className='flex justify-between lg:hidden'>
             <span className='text-[#333] font-mulish text-xs font-bold leading-[normal]'>
               Edit your search
@@ -148,21 +155,59 @@ export default function SearchBar ({ country, city, guests }: Props) {
           </div>
 
           <div className='flex flex-col lg:flex-row mt-3 rounded-[16px] shadow-[0_1px_6px_0_rgba(0,0,0,0.1)]'>
-            <div className='flex flex-col flex-grow py-3 px-6 border-b-[1px] lg:border-b-[0] lg:border-r-[1px] border-[#F2F2F2]'>
-              <span className='text-[#333] font-mulish text-[9px] font-extrabold leading-[normal] uppercase'>
-                Location
-              </span>
-              <span className='text-[#333] text-sm leading-[normal] font-normal'>
-                {cityParam?.length > 0
-                  ? `${cityParam}, ${countryParam}`
-                  : countryParam}
-              </span>
+            <div className='flex flex-col flex-grow relative lg:border-r-[1px] border-[#F2F2F2]'>
+              <div
+                style={
+                  isLocationsMenuOpen && window.innerWidth >= 1024
+                    ? {
+                        border: '1px solid black'
+                      }
+                    : {
+                        border: 'none'
+                      }
+                }
+                onClick={handleToggleLocationsMenu}
+                className='flex flex-col flex-grow py-3 px-6 border-b-[1px] lg:border-b-[0] lg:border-r-[1px] border-[#F2F2F2] cursor-pointer rounded-2xl'
+              >
+                <span className='text-[#333] font-mulish text-[9px] font-extrabold leading-[normal] uppercase'>
+                  Location
+                </span>
+                <span className='text-[#333] text-sm leading-[normal] font-normal'>
+                  {cityParam?.length > 0
+                    ? `${cityParam}, ${countryParam}`
+                    : countryParam}
+                </span>
+              </div>
+
+              <div
+                style={
+                  isLocationsMenuOpen
+                    ? { opacity: '1', zIndex: 99 }
+                    : { opacity: '0', zIndex: -1 }
+                }
+                className='bg-white px-6 py-3 absolute top-[130px] lg:top-[70px] left-0 right-0'
+              >
+                {locations.map((location) => (
+                  <div
+                    key={location.id}
+                    onClick={() => {
+                      handleChangeLocation(location.country, location.city)
+                    }}
+                    className='flex items-center mb-9 cursor-pointer'
+                  >
+                    <LocationIcon />
+                    <span className='ml-[10px] text-[#4F4F4F] text-sm leading-[normal] font-normal'>
+                      {location.city}, {location.country}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
 
             <div className='flex flex-col flex-grow relative lg:border-r-[1px] border-[#F2F2F2]'>
               <div
                 style={
-                  isGuestsMenuOpen
+                  isGuestsMenuOpen && window.innerWidth >= 1024
                     ? {
                         border: '1px solid black'
                       }
@@ -190,7 +235,7 @@ export default function SearchBar ({ country, city, guests }: Props) {
                     ? { opacity: '1', zIndex: 99 }
                     : { opacity: '0', zIndex: -1 }
                 }
-                className='bg-white absolute left-0 top-0 right-0 px-6 py-3 rounded-b-[16px] shadow-[0_2px_6px_0_rgba(0,0,0,0.1)] lg:shadow-none lg:rounded-none lg:top-[68px]'
+                className='bg-white px-6 py-3 absolute top-[70px] left-0 right-0'
               >
                 <div className='flex flex-col'>
                   <div
@@ -238,21 +283,8 @@ export default function SearchBar ({ country, city, guests }: Props) {
             </div>
           </div>
 
-          <div className='p-7'>
-            {locations.map((location) => (
-              <div
-                key={location.id}
-                onClick={() => {
-                  handleChangeLocation(location.country, location.city)
-                }}
-                className='flex items-center mb-9 cursor-pointer'
-              >
-                <LocationIcon />
-                <span className='ml-[10px] text-[#4F4F4F] text-sm leading-[normal] font-normal'>
-                  {location.city}, {location.country}
-                </span>
-              </div>
-            ))}
+          <div className='mt-3 relative lg:flex'>
+            <div className='flex-grow'></div>
           </div>
 
           <div className='w-full bg-white absolute left-0 bottom-6 lg:hidden'>
