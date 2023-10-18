@@ -1,15 +1,12 @@
+import { getData } from './api/stays/route'
 import Card from './components/card'
 import { Header } from './components/header'
 import { type Stay } from './types/stays'
 
 async function getStays () {
-  const res = await fetch('http://localhost:3000/api/stays', {
-    next: {
-      revalidate: 60
-    }
-  })
+  const data = await getData()
 
-  return await res.json()
+  return data
 }
 
 export default async function Home ({
@@ -17,7 +14,7 @@ export default async function Home ({
 }: {
   searchParams?: Record<string, string | undefined>
 }) {
-  const res = await getStays()
+  const data = await getStays()
 
   const country =
     searchParams !== undefined
@@ -27,7 +24,7 @@ export default async function Home ({
   const guests =
     searchParams !== undefined ? (searchParams.guests ??= '0') : '0'
 
-  const stays: Stay[] = res.stays.filter((stay: Stay) => {
+  const stays: Stay[] = data.filter((stay: Stay) => {
     if (country === '') {
       return stay.maxGuests >= parseInt(guests)
     }

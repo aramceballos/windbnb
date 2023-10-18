@@ -7,6 +7,6 @@ export interface Stay {
   rating: number
   maxGuests: number
   type: string
-  beds: number
+  beds: number | null
   photo: string
 }

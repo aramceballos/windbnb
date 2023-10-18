@@ -1,4 +1,6 @@
-export async function GET (request: Request) {
+import { type Stay } from '@/app/types/stays'
+
+export async function getData (): Promise<Stay[]> {
   const stays = [
     {
       id: 1,
@@ -183,6 +185,12 @@ export async function GET (request: Request) {
         'https://images.unsplash.com/photo-1523755231516-e43fd2e8dca5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1275&q=80'
     }
   ]
+
+  return stays
+}
+
+export async function GET () {
+  const stays = await getData()
 
   return Response.json({ stays })
 }
