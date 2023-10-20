@@ -67,6 +67,10 @@ export default async function Home ({
           />
         ))}
       </div>
+
+      <footer className=' pb-6'>
+        <p className='text-[#828282] text-center text-sm leading-[normal]'>created by <span className='font-bold underline'>aramceballos</span> - devChallenges.io</p>
+      </footer>
     </main>
   )
 }
